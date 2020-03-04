@@ -252,4 +252,5 @@ paket-files/
 *.sln.iml
 
 # Coverage Report
-MyProject_coverage.xml
+MyProject_coverage.xml.ionide/
+.ionide
