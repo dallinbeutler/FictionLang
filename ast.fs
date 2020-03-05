@@ -49,7 +49,7 @@ type ParserState = {
 }
 
 module ParserStateChange =
-
+  // standard syntax for writing a parser. Still not sure how to write one that works without (|>) operator...
   let updateCurNoun (p: Parser<NounName,ParserState>) :Parser<NounName,ParserState> =
     fun stream ->
       let reply = p stream
