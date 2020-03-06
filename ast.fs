@@ -6,6 +6,7 @@ open FParsec
 
 type NounName = NounName of string
 type PropName = PropName of string
+type Comment  = Comment of string
 //type Access =
 //|Noun of NounName
 //|Prop of NounName * =
@@ -22,13 +23,20 @@ type Property = {
         value:PropVal
         }
 
-type AST = 
-    |NounLine of NounName
-    |Comment of string
-    |BlankLine
-    |Mutation of Property
-    |Assertion of Property
+type NounAttribute = 
+|Mutation of Property
+|Assertion of Property
 
+
+//type AST = 
+//    |NounLine of NounName
+//    |Comment of string
+    //|BlankLine
+    //|NounAtt of NounAttribute
+type QualifiedNoun = {
+  name: NounName
+  items: NounAttribute list
+}
 
 type TokenType =
 |HComment

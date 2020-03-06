@@ -74,12 +74,12 @@ module Parser =
       <?> "prop value" 
       
   let pAssert =
-      %% (%"assert" |> Highlighting.highlight TokenType.HAssert) -- spaces -- +. pPropLine -|> Assertion
+      %% (%"assert" |> Highlighting.highlight TokenType.HAssert) -- spaces -- +. pPropLine -|> (Assertion)
 
   let propParse = 
       %[
           pAssert
-          pPropLine |>> Mutation
+          pPropLine |>> (Mutation)
           //comments
           //(newline <?>"blank line") >>% BlankLine <??>"blank line"
       ] <??> "property"
@@ -89,7 +89,7 @@ module Parser =
   let emptystuff' = skipMany1 %[spaces1 <?> "empty space"; comments  <?> "empty space"|>>ignore ]
   
   let fullParse =
-    many (%% emptystuff' -- +. (pNounName|>ParserStateChange.updateCurNoun) -- +. many (attempt( emptystuff' >>. propParse)) -|> (fun n list -> {|noun = n; items = list |} ) )
+    many (%% emptystuff' -- +. (pNounName|>ParserStateChange.updateCurNoun) -- +. many (attempt( emptystuff' >>. propParse)) -|> (fun n list -> {name = n; items = list} ) )
          
      
 
